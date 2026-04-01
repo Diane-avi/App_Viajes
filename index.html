@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>App de Viajes con Imágenes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      width: 250px;
+      margin: 15px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card h2 {
+      color: #0077b6;
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    button {
+      background: #0077b6;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #023e8a;
+    }
+    #info {
+      margin: 20px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌍 App de Viajes con Imágenes</h1>
+    <p>Haz clic en un destino para ver información interesante</p>
+  </header>
+
+  <div class="container" id="destinos"></div>
+
+  <div id="info">
+    <h2>Información del destino</h2>
+    <p>Selecciona un destino para ver detalles aquí.</p>
+  </div>
+
+  <script>
+    const destinos = {
+      "París": {
+        clima: "Templado, 18°C",
+        atracciones: ["Torre Eiffel", "Museo del Louvre", "Catedral de Notre Dame"],
+        consejo: "Compra entradas online para evitar largas filas.",
+        imagen: "Paris.jpg"
+      },
+      "Tokio": {
+        clima: "Soleado, 22°C",
+        atracciones: ["Templo Senso-ji", "Shibuya Crossing", "Mercado de Tsukiji"],
+        consejo: "Usa el Japan Rail Pass para moverte fácilmente.",
+        imagen: "Tokio.jpg"
+      },
+      "Roma": {
+        clima: "Cálido, 20°C",
+        atracciones: ["Coliseo", "Fontana di Trevi", "Basílica de San Pedro"],
+        consejo: "Visita temprano los sitios para evitar multitudes.",
+        imagen: "Roma.jpg"
+      },
+      "Nueva York": {
+        clima: "Frío, 10°C",
+        atracciones: ["Estatua de la Libertad", "Central Park", "Times Square"],
+        consejo: "Compra una MetroCard para ahorrar en transporte.",
+        imagen: "Nueva.jpg"
+      },
+      "Río de Janeiro": {
+        clima: "Tropical, 28°C",
+        atracciones: ["Cristo Redentor", "Copacabana", "Pan de Azúcar"],
+        consejo: "Visita durante el Carnaval para una experiencia única.",
+        imagen: "Rio.jpg"
+      }
+    };
+
+    function mostrarDestinos() {
+      const contenedor = document.getElementById("destinos");
+      for (let ciudad in destinos) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${destinos[ciudad].imagen}" alt="${ciudad}">
+          <h2>${ciudad}</h2>
+          <button onclick="mostrarInfo('${ciudad}')">Ver información</button>
+        `;
+        contenedor.appendChild(card);
+      }
+    }
+
+    function mostrarInfo(ciudad) {
+      const info = destinos[ciudad];
+      const infoDiv = document.getElementById("info");
+      infoDiv.innerHTML = `
+        <h2>${ciudad}</h2>
+        <p><strong>Clima:</strong> ${info.clima}</p>
+        <p><strong>Atracciones:</strong> ${info.atracciones.join(", ")}</p>
+        <p><strong>Consejo:</strong> ${info.consejo}</p>
+      `;
+    }
+
+    mostrarDestinos();
+  </script>
+</body>
+</html>
